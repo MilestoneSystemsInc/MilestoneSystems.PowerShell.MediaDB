@@ -23,4 +23,7 @@
     'PSScriptAnalyzer' = @{
         Version = '1.23.0'
     }
+    'MilestonePSTools' = @{
+        Version = '24.2.1'
+    }
 }
