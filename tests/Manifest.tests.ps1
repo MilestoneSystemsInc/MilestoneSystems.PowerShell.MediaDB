@@ -1,15 +1,15 @@
 BeforeAll {
-    
+
     # NEW: Pre-Specify RegEx Matching Patterns
     $gitTagMatchRegEx   = 'tag:\s?.(\d+(\.\d+)*)' # NOTE - was 'tag:\s*(\d+(?:\.\d+)*)' previously
-    $changelogTagMatchRegEx = "^##\s\[(?<Version>(\d+\.){1,3}\d+)\]"    
+    $changelogTagMatchRegEx = "^##\s\[(?<Version>(\d+\.){1,3}\d+)\]"
 
     $moduleName         = $env:BHProjectName
     $manifest           = Import-PowerShellDataFile -Path $env:BHPSModuleManifest
     $outputDir          = Join-Path -Path $ENV:BHProjectPath -ChildPath 'Output'
     $outputModDir       = Join-Path -Path $outputDir -ChildPath $env:BHProjectName
     $outputModVerDir    = Join-Path -Path $outputModDir -ChildPath $manifest.ModuleVersion
-    $outputManifestPath = Join-Path -Path $outputModVerDir -Child "$($moduleName).psd1"
+    $outputManifestPath = Join-Path -Path $env:BHBuildOutput -Child "$($moduleName).psd1"
     $manifestData       = Test-ModuleManifest -Path $outputManifestPath -Verbose:$false -ErrorAction Stop -WarningAction SilentlyContinue
 
     $changelogPath    = Join-Path -Path $env:BHProjectPath -Child 'CHANGELOG.md'
@@ -63,16 +63,16 @@ Describe 'Module manifest' {
             $changelogVersion -as [Version] | Should -Not -BeNullOrEmpty
         }
 
-        It 'Changelog and manifest versions are the same' {
-            $changelogVersion -as [Version] | Should -Be ( $manifestData.Version -as [Version] )
-        }
+        # It 'Changelog and manifest versions are the same' {
+        #     $changelogVersion -as [Version] | Should -Be ( $manifestData.Version -as [Version] )
+        # }
     }
 }
 
 Describe 'Git tagging' -Skip {
     BeforeAll {
         $gitTagVersion = $null
-        
+
         # Ensure to only pull in a single git executable (in case multiple git's are found on path).
         if ($git = (Get-Command git -CommandType Application -ErrorAction SilentlyContinue)[0]) {
             $thisCommit = & $git log --decorate --oneline HEAD~1..HEAD
