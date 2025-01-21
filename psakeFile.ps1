@@ -8,7 +8,7 @@ properties {
     $psake.context.tasks.stagefiles.PostAction = {
         Write-Verbose "Updating ModuleVersion in output manifest to NBGV-based version $($PSBPreference.General.ModuleVersion)"
         $outputManifestPath = [io.path]::Combine($PSBPreference.Build.ModuleOutDir, "$($PSBPreference.General.ModuleName).psd1")
-        Update-Metadata -Path $outputManifestPath -PropertyName ModuleVersion -Value $PSBPreference.General.ModuleVersion
+        BuildHelpers\Update-Metadata -Path $outputManifestPath -PropertyName ModuleVersion -Value $PSBPreference.General.ModuleVersion
 
         Write-Verbose "Converting root module to UTF8 since PowerShellBuild generates a Unicode file on Windows PowerShell"
         Import-Module (Join-Path $env:BHProjectPath 'tests/MetaFixers.psm1')
