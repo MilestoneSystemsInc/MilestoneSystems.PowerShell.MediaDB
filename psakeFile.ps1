@@ -18,7 +18,7 @@ properties {
         Get-Item $rootModulePath | ConvertTo-UTF8
     }
 
-    $module = Import-Module PowerShellBuild
+    $module = Import-Module PowerShellBuild -PassThru
     & $module {
         Write-Host (Get-Command Update-Metadata | Out-String)
         Write-Host (Get-Help Update-Metadata -Full | Out-String)
