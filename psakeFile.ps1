@@ -7,7 +7,7 @@ properties {
 
     $psake.context.tasks.stagefiles.PostAction = {
         $outputManifestPath = [io.path]::Combine($PSBPreference.Build.ModuleOutDir, "$($PSBPreference.General.ModuleName).psd1")
-        Write-Verbose "Updating ModuleVersion in output manifest '$outputManifestPath' to NBGV-based version $($PSBPreference.General.ModuleVersion)"
+        Write-Host "Updating ModuleVersion in output manifest '$outputManifestPath' to NBGV-based version $($PSBPreference.General.ModuleVersion)"
         BuildHelpers\Update-Metadata -Path $outputManifestPath -Property ModuleVersion -Value $PSBPreference.General.ModuleVersion
         #$content = Get-Content $outputManifestPath | ForEach-Object { $_ -replace "'0.1.0'", "'$($PSBPreference.General.ModuleVersion)'" }
         #$content | Set-Content $outputManifestPath -Encoding UTF8
