@@ -17,6 +17,12 @@ properties {
         $rootModulePath = Join-Path -Path $env:BHBuildOutput -ChildPath "$($env:BHProjectName).psm1"
         Get-Item $rootModulePath | ConvertTo-UTF8
     }
+
+    $module = Import-Module PowerShellBuild
+    & $module {
+        Write-Host (Get-Command Update-Metadata | Out-String)
+        Write-Host (Get-Help Update-Metadata -Full | Out-String)
+    }
 }
 
 task Default -depends Test
