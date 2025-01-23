@@ -4,9 +4,18 @@
     }
     PSDependOptions = @{
         Target = 'CurrentUser'
+        Parameters = @{
+            Scope = 'CurrentUser'
+        }
     }
     'Pester' = @{
         RequiredVersion = '5.3.0'
+        Parameters = @{
+            SkipPublisherCheck = $true
+        }
+    }
+    'platyPS' = @{
+        RequiredVersion = '0.14.2'
         Parameters = @{
             SkipPublisherCheck = $true
         }
