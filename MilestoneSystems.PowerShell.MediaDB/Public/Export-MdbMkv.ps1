@@ -32,7 +32,11 @@ function Export-MdbMkv {
 
         $Path = $ExecutionContext.SessionState.Path.GetUnresolvedProviderPathFromPSPath($Path)
         $fileInfo = [io.fileinfo]::new($Path)
-        $null = New-Item -Path $fileInfo.DirectoryName -ItemType Directory -Force
+        if (!(Test-Path -Path $fileInfo.DirectoryName)) {
+            Write-Verbose "Creating directory '$($fileInfo.DirectoryName)'"
+            $null = New-Item -Path $fileInfo.DirectoryName -ItemType Directory -Force
+        }
+
 
         try {
             Write-Verbose "Exporting $($Device.Name) from $($Start.ToLocalTime().ToString('o')) to $($End.ToLocalTime().ToString('o'))"
@@ -49,8 +53,11 @@ function Export-MdbMkv {
             $exporter.Filename = $fileInfo.Name
             $exporter.Path = $fileInfo.DirectoryName
             $exporter.Init()
-            $exporter.StartExport($Start, $End)
-            while ($exporter.Progress -lt 100) {
+            if (!$exporter.StartExport($Start, $End)) {
+                Write-Error "MKVExporter could not begin the export process. Error code $($exporter.LastError): $($exporter.LastErrorString)" -TargetObject $exporter
+            }
+
+            while ($exporter.Progress -lt 100 -and $exporter.LastError -eq 0) {
                 $progress.PercentComplete = $exporter.Progress
                 Write-Progress @progress
                 Start-Sleep -Milliseconds 250
