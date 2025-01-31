@@ -11,6 +11,9 @@ jobs:
         fetch-depth: 0
 
     - name: Test
+      id: test
       shell: powershell
-      run: ./build.ps1 -Task Test -Bootstrap
+      run: |
+          .\build.ps1 -Task Test -Bootstrap -ErrorAction Stop
+          "BHBuildOutput=$($env:BHBuildOutput)" | Add-Content "$($env:GITHUB_OUTPUT)"
 

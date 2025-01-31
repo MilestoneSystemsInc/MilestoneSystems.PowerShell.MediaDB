@@ -1,16 +1,20 @@
 function Export-MdbMkv {
-    [CmdletBinding()]
+    [CmdletBinding(DefaultParameterSetName = 'Item')]
     [OutputType([System.IO.FileInfo])]
     param(
-        [Parameter(Mandatory, ValueFromPipeline)]
+        [Parameter(Mandatory, ValueFromPipeline, ParameterSetName = 'Item')]
         [VideoOS.Platform.Item]
         $Device,
 
-        [Parameter(Mandatory)]
+        [Parameter(Mandatory, ValueFromPipelineByPropertyName, ParameterSetName = 'FQID')]
+        [VideoOS.Platform.FQID]
+        $FQID,
+
+        [Parameter(Mandatory, ValueFromPipelineByPropertyName)]
         [DateTime]
         $Start,
 
-        [Parameter(Mandatory)]
+        [Parameter(Mandatory, ValueFromPipelineByPropertyName)]
         [DateTime]
         $End,
 
@@ -20,6 +24,10 @@ function Export-MdbMkv {
     )
 
     process {
+        if ($null -eq $Device) {
+            $Device = [videoos.platform.configuration]::Instance.GetItem($FQID)
+        }
+
         $epoch = [datetime]::SpecifyKind([datetimeoffset]::FromUnixTimeSeconds(0).DateTime, [datetimekind]::utc)
         $Start = $Start.ToUniversalTime()
         if ($Start -lt $epoch) {

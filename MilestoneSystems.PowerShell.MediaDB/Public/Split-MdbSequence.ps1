@@ -1,8 +1,9 @@
 function Split-MdbSequence {
     [CmdletBinding()]
+    [OutputType([SequenceInfo])]
     param (
         [Parameter(Mandatory, ValueFromPipeline)]
-        [VideoOS.Platform.Data.SequenceData[]]
+        [SequenceInfo[]]
         $Sequences,
 
         [Parameter()]
@@ -18,32 +19,40 @@ function Split-MdbSequence {
     process {
         for ($i = 0; $i -lt $Sequences.Count; $i++) {
             Write-Verbose "Processing sequence $i"
-            $sequence = $Sequences[$i].EventSequence
+            $sequence = $Sequences[$i]
 
             if ($null -eq $t1) {
-                $t1 = $sequence.StartDateTime
+                $t1 = $sequence.Start
             }
 
             do {
-                if ($sequence.StartDateTime.Add($remainingDuration) -le $sequence.EndDateTime) {
-                    [pscustomobject]@{
-                        Start = $t1
-                        End   = $sequence.StartDateTime.Add($remainingDuration)
+                if ($sequence.Start.Add($remainingDuration) -le $sequence.End) {
+                    [sequenceinfo]@{
+                        Source = $sequence.Source
+                        Start  = $t1
+                        End    = $sequence.Start.Add($remainingDuration)
+                        Type   = $sequence.Type
+                        Id     = $sequence.Id
+                        FQID   = $sequence.FQID
                     }
-                    $t1 = $sequence.StartDateTime = $sequence.StartDateTime.Add($remainingDuration).AddTicks(1)
+                    $t1 = $sequence.Start = $sequence.Start.Add($remainingDuration).AddTicks(1)
                     $remainingDuration = $MaxDuration
                 } else {
-                    $remainingDuration = $remainingDuration - ($sequence.EndDateTime - $sequence.StartDateTime)
+                    $remainingDuration = $remainingDuration - ($sequence.End - $sequence.Start)
                 }
             } while ($remainingDuration -eq $MaxDuration)
-            if ($t1 -ge $sequence.EndDateTime) {
+            if ($t1 -ge $sequence.End) {
                 $t1 = $null
             }
         }
         if ($remainingDuration -gt [timespan]::Zero) {
-            [pscustomobject]@{
-                Start = $t1
-                End   = $Sequences[-1].EventSequence.EndDateTime
+            [sequenceinfo]@{
+                Source = $sequence.Source
+                Start  = $t1
+                End    = $Sequences[-1].End
+                Type   = $Sequences[-1].Type
+                Id     = $Sequences[-1].Id
+                FQID   = $Sequences[-1].FQID
             }
         }
     }

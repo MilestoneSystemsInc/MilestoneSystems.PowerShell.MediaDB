@@ -13,7 +13,7 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-Split-MdbSequence [-Sequences] <SequenceData[]> [[-MaxDuration] <TimeSpan>] [<CommonParameters>]
+Split-MdbSequence [-Sequences] <SequenceInfo[]> [[-MaxDuration] <TimeSpan>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -49,7 +49,7 @@ Accept wildcard characters: False
 {{ Fill Sequences Description }}
 
 ```yaml
-Type: SequenceData[]
+Type: SequenceInfo[]
 Parameter Sets: (All)
 Aliases:
 

@@ -1,6 +1,6 @@
 function Get-MdbSequence {
     [CmdletBinding()]
-    [OutputType([VideoOS.Platform.Data.SequenceData])]
+    [OutputType([SequenceInfo])]
     param(
         [Parameter(Mandatory, ValueFromPipeline)]
         [VideoOS.Platform.Item]
@@ -15,7 +15,7 @@ function Get-MdbSequence {
         $End = [datetime]::MaxValue,
 
         [Parameter()]
-        [ValidateSet('MotionSequence', 'RecordingSequence', 'RecordingWithTriggerSequence')]
+        [ValidateSet('MotionSequence', 'RecordingSequence', 'RecordingWithTriggerSequence', 'TimelineMotionDetected', 'TimelineRecording')]
         [string]
         $Type = 'RecordingSequence',
 
@@ -64,7 +64,7 @@ function Get-MdbSequence {
                         $sequence.EventSequence.EndDateTime = $End
                     }
                     $lastSequence = $sequence
-                    $sequence
+                    [sequenceinfo]::new($sequence, $Type)
                     $count++
                 }
 

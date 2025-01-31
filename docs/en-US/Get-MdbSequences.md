@@ -113,7 +113,7 @@ Accept wildcard characters: False
 Type: String
 Parameter Sets: (All)
 Aliases:
-Accepted values: MotionSequence, RecordingSequence, RecordingWithTriggerSequence
+Accepted values: MotionSequence, RecordingSequence, RecordingWithTriggerSequence, TimelineMotionDetected, TimelineRecording
 
 Required: False
 Position: 3
