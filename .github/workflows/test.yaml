@@ -1,0 +1,19 @@
+name: Testing
+on:
+  workflow_dispatch:
+jobs:
+  test:
+    name: Testing
+    runs-on: windows-latest
+    environment: Build
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Test
+      id: test
+      shell: powershell
+      run: |
+          Get-Command Update-Metadata
+
