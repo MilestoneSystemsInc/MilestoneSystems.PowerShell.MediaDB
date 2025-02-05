@@ -16,4 +16,4 @@ jobs:
       shell: powershell
       run: |
           $PSVersionTable
-
+          Get-Module -ListAvailable
