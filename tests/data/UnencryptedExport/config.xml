@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<bank id="0F15508E-7EB8-48B1-BFC6-D1CCB07CFBEB" version="1.2">
+    <passwords>
+        <password selector="0"
+            value="377BC43C059331364202EB3A494C5BAA816B3E9BD0C9A3B612DAC3B37732D2BA40227F0D2924301AFAC641405F62" />
+    </passwords>
+    <password_encryption>AES-256</password_encryption>
+    <table_passwords_are_fips_compliant>1</table_passwords_are_fips_compliant>
+    <archive></archive>
+</bank>

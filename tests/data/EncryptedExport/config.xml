@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<bank id="375AF121-2F36-47FF-9762-FBC08818A6C9" version="1.2">
+    <passwords>
+        <password selector="0"
+            value="A1D18D82A3DA65687DEC92FAE21E441F4A6FFBDBC5C9B308A403380A00A00A3F77EF36798FCAFD77043D842C3015B6" />
+        <password selector="1"
+            value="B5727ECEAB0887C8B22B3FF0BEB91E0976C01436F757D2D4A9C2D2A1A3B391F00616F8559692D9B73B99AB03E9BFA9F4D4A452FDA573955724480A2AE4428235" />
+        <password selector="2"
+            value="5F967014A9DF9AF991E95A311CB79405E71EA840669C13CBA03D98B3160700DF2130598E435BEBBB9706367466CE6290E9BEF48A67BB815863FD2007368AEC67" />
+    </passwords>
+    <password_encryption>AES-256</password_encryption>
+    <table_passwords_are_fips_compliant>1</table_passwords_are_fips_compliant>
+    <archive></archive>
+</bank>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<bank version="1.2">
+    <description>Shoe Store</description>
+    <meta_data>
+        <entry key="device_type">Camera</entry>
+    </meta_data>
+</bank>

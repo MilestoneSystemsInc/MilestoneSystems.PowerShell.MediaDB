@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<bank version="1.2">
+    <description>Shoe Store</description>
+    <encryption>
+        <algorithm>AES</algorithm>
+        <size_to_encrypt>0</size_to_encrypt>
+        <password_selection>1</password_selection>
+    </encryption>
+    <meta_data>
+        <entry key="device_type">Camera</entry>
+    </meta_data>
+</bank>
