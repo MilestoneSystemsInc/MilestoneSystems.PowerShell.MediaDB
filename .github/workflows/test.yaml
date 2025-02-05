@@ -15,5 +15,4 @@ jobs:
       id: test
       shell: powershell
       run: |
-          $PSVersionTable
-          Get-Module -ListAvailable
+          Get-Module -ListAvailable | Select Name, Version, ExportedCommands | ConvertTo-Json -Compress
