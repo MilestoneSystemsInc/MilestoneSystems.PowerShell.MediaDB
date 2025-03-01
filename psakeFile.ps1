@@ -7,10 +7,14 @@ properties {
 
     $psake.context.tasks.stagefiles.PostAction = {
         $outputManifestPath = [io.path]::Combine($PSBPreference.Build.ModuleOutDir, "$($PSBPreference.General.ModuleName).psd1")
-        Write-Host "Updating ModuleVersion in output manifest '$outputManifestPath' to NBGV-based version $($PSBPreference.General.ModuleVersion)"
-        BuildHelpers\Update-Metadata -Path $outputManifestPath -Property ModuleVersion -Value $PSBPreference.General.ModuleVersion
-        #$content = Get-Content $outputManifestPath | ForEach-Object { $_ -replace "'0.1.0'", "'$($PSBPreference.General.ModuleVersion)'" }
-        #$content | Set-Content $outputManifestPath -Encoding UTF8
+        Write-Verbose "Updating ModuleVersion in output manifest '$outputManifestPath' to NBGV-based version $($PSBPreference.General.ModuleVersion)"
+
+        if (Get-Module MilestonePSTools) {
+            # Unload the MilestonePSTools module due to conflicting Get-Metadata command
+            Remove-Module MilestonePSTools -Force
+        }
+
+        Update-Metadata -Path $outputManifestPath -Value $PSBPreference.General.ModuleVersion
 
         Write-Verbose "Converting root module to UTF8 since PowerShellBuild generates a Unicode file on Windows PowerShell"
         Import-Module (Join-Path $env:BHProjectPath 'tests/MetaFixers.psm1')

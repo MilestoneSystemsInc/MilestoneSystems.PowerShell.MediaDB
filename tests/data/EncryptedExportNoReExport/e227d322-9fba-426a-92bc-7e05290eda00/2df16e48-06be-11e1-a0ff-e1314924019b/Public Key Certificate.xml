@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?><public_key_certificate type="videoos">
+    <identity>VideoOS Client Certificate</identity>
+    <public_key>MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEcCLSZIHn3XST9jgPDNHGfS5Lx9wrYLjJSrDzkWkYakjwiv1AL+RkdnZxIC0MUWSRwjg24HD88arkpK3TKOXU5Q==</public_key>
+    <signature>I1jwu87hODHEqXL125W6rMgPZJkwAOIMb8z3DL5qd+YkYmuMM+xARsJoJlUuuNJuigkMq6FshOPWBwIQKRZcKg==</signature>
+    <algorithm>ECDSA_SECP256R1_SHA256</algorithm>
+</public_key_certificate>

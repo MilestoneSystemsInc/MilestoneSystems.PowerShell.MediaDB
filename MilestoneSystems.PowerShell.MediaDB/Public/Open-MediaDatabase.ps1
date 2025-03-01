@@ -54,7 +54,8 @@ function Open-MediaDatabase {
             "file:\$DatabasePath"
         )
     } catch {
-        Close-MediaDatabase -LiteralPath $DatabasePath
+        # Must remove all servers - removing just the one that failed to open will throw UriFormatException
+        [videoos.platform.sdk.environment]::RemoveAllServers()
         throw
     }
 }

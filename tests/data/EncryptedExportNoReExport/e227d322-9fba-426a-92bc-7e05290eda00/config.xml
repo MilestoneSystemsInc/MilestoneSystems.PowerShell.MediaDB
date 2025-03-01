@@ -3,9 +3,10 @@
             <encryption>
                 <algorithm>AES</algorithm>
                 <size_to_encrypt>0</size_to_encrypt>
-                <password_selection>1</password_selection>
+                <password_selection>2</password_selection>
             </encryption>
             <meta_data>
                 <entry key="device_type">Camera</entry>
             </meta_data>
+            <signing_algorithm>SHA2</signing_algorithm>
     </bank>

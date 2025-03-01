@@ -2,7 +2,7 @@
 <bank version="1.2">
     <table>
             <name>b01d0219-36ee-4720-afb2-025cfa3bd231</name>
-            <size>568</size>
+            <size>663</size>
             <description>Shoe Store</description>
             <encryption>
                 <algorithm>AES</algorithm>
@@ -12,6 +12,11 @@
             <meta_data>
                 <entry key="device_type">Camera</entry>
             </meta_data>
+            <signing_algorithm>SHA2</signing_algorithm>
+        <column>
+            <name>2df16e48-06be-11e1-a0ff-e1314924019b</name>
+            <size>24</size>
+        </column>
         <column>
             <name>7ea9b53b-749e-420b-891b-43b238f6144e</name>
             <size>24</size>
@@ -24,10 +29,14 @@
             <name>908d3e34-3510-4372-9e3f-20c53b92490a</name>
             <size>24</size>
         </column>
+        <column>
+            <name>f3f39289-0372-410d-8936-802b1e627567</name>
+            <size>24</size>
+        </column>
     </table>
     <table>
             <name>e227d322-9fba-426a-92bc-7e05290eda00</name>
-            <size>39105060</size>
+            <size>39956530</size>
             <description>Shoe Store</description>
             <encryption>
                 <algorithm>AES</algorithm>
@@ -37,20 +46,31 @@
             <meta_data>
                 <entry key="device_type">Camera</entry>
             </meta_data>
+            <signing_algorithm>SHA2</signing_algorithm>
         <column>
-            <name>7ea9b53b-749e-420b-891b-43b238f6144e</name>
-            <begin_time>1740692276638</begin_time>
-            <end_time>1740692337538</end_time>
+            <name>2df16e48-06be-11e1-a0ff-e1314924019b</name>
+            <begin_time>1740692297604</begin_time>
+            <end_time>1740692359504</end_time>
             <meta_data_first_record>0</meta_data_first_record>
             <meta_data_last_record>0</meta_data_last_record>
             <begin_time_last_record>0</begin_time_last_record>
             <end_time_first_record>0</end_time_first_record>
-            <size>39104392</size>
+            <size>205547</size>
+        </column>
+        <column>
+            <name>7ea9b53b-749e-420b-891b-43b238f6144e</name>
+            <begin_time>1740692297604</begin_time>
+            <end_time>1740692359504</end_time>
+            <meta_data_first_record>0</meta_data_first_record>
+            <meta_data_last_record>0</meta_data_last_record>
+            <begin_time_last_record>0</begin_time_last_record>
+            <end_time_first_record>0</end_time_first_record>
+            <size>39750244</size>
         </column>
         <column>
             <name>8b742df9-5ba1-49df-ace1-66e54f5dc295</name>
-            <begin_time>1740692276638</begin_time>
-            <end_time>1740692337538</end_time>
+            <begin_time>1740692297604</begin_time>
+            <end_time>1740692359504</end_time>
             <meta_data_first_record>0</meta_data_first_record>
             <meta_data_last_record>0</meta_data_last_record>
             <begin_time_last_record>0</begin_time_last_record>
@@ -59,6 +79,10 @@
         </column>
         <column>
             <name>908d3e34-3510-4372-9e3f-20c53b92490a</name>
+            <size>24</size>
+        </column>
+        <column>
+            <name>f3f39289-0372-410d-8936-802b1e627567</name>
             <size>24</size>
         </column>
     </table>

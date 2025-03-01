@@ -8,4 +8,5 @@
             <meta_data>
                 <entry key="device_type">Camera</entry>
             </meta_data>
+            <signing_algorithm>SHA2</signing_algorithm>
     </bank>
