@@ -13,7 +13,7 @@ properties {
             # Unload the MilestonePSTools module due to conflicting Get-Metadata command
             Remove-Module MilestonePSTools -Force
         }
-
+        Import-Module BuildHelpers -Force
         Update-Metadata -Path $outputManifestPath -Value $PSBPreference.General.ModuleVersion
 
         Write-Verbose "Converting root module to UTF8 since PowerShellBuild generates a Unicode file on Windows PowerShell"
