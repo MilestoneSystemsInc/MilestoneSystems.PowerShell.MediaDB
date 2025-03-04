@@ -11,8 +11,9 @@ Context "Export-Mdb" {
     It "Can export from encrypted database" {
         $password = 'rzxW&s3Ftw' | ConvertTo-SecureString -AsPlainText -Force
         Open-MediaDatabase -Path $script:EncryptedDbPath -Password $password
-
-        $folder = Get-MdbCamera | Get-MdbSequence -Type RecordingSequence | ForEach-Object {
+        $sequences = Get-MdbCamera | Get-MdbSequence -Type RecordingSequence
+        Write-Host "Found $($sequences.Count) sequences" -ForegroundColor Cyan
+        $folder = $sequences | ForEach-Object {
             $path = 'TestDrive:\{0}_{1}_Database' -f $_.Source, $_.Start.ToString('yyyy-MM-dd_HH-mm-ss')
             $exportParams = @{
                 Start       = $_.Start
