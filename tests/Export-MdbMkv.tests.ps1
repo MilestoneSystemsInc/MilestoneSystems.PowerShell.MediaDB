@@ -15,10 +15,12 @@ Context "Export-MdbMkv" {
         $mkvFile = Get-MdbCamera | Get-MdbSequence -Type RecordingSequence | ForEach-Object {
             $path = 'TestDrive:\{0}_{1}.mkv' -f $_.Source, $_.Start.ToString('yyyy-MM-dd_HH-mm-ss')
             $exportParams = @{
-                Start  = $_.Start
-                End    = $_.End
-                Path   = $path
+                Start       = $_.Start
+                End         = $_.End
+                Path        = $path
+                ErrorAction = 'Stop'
             }
+            Write-Host "Exporting to $path" -ForegroundColor Magenta
             $_ | Export-MdbMkv @exportParams
         }
         $mkvFile | Should -Not -BeNullOrEmpty
