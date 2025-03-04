@@ -9,12 +9,11 @@ properties {
         $outputManifestPath = [io.path]::Combine($PSBPreference.Build.ModuleOutDir, "$($PSBPreference.General.ModuleName).psd1")
         Write-Verbose "Updating ModuleVersion in output manifest '$outputManifestPath' to NBGV-based version $($PSBPreference.General.ModuleVersion)"
 
-        if (Get-Module MilestonePSTools) {
-            # Unload the MilestonePSTools module due to conflicting Get-Metadata command
-            Remove-Module MilestonePSTools -Force
+        # Update-Metadata will not work consistently due to a problem with the Get-Metadata alias in MilestonePSTools
+        $content = Get-Content -LiteralPath $outputManifestPath | ForEach-Object {
+            $_ -replace '^\s*ModuleVersion\s*=.+$', "    ModuleVersion     = '$($PSBPreference.General.ModuleVersion)'"
         }
-        Import-Module BuildHelpers -Force
-        Update-Metadata -Path $outputManifestPath -Value $PSBPreference.General.ModuleVersion
+        $content | Set-Content -LiteralPath $outputManifestPath
 
         Write-Verbose "Converting root module to UTF8 since PowerShellBuild generates a Unicode file on Windows PowerShell"
         Import-Module (Join-Path $env:BHProjectPath 'tests/MetaFixers.psm1')
