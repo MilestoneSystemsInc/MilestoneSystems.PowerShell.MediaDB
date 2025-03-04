@@ -9,7 +9,7 @@
         }
     }
     'Pester' = @{
-        RequiredVersion = '5.3.0'
+        RequiredVersion = '5.7.1'
         Parameters = @{
             SkipPublisherCheck = $true
         }
@@ -33,6 +33,6 @@
         Version = '1.23.0'
     }
     'MilestonePSTools' = @{
-        Version = '24.2.1'
+        Version = '24.2.18'
     }
 }
