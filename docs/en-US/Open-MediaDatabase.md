@@ -14,13 +14,11 @@ Opens an XProtect media database from a recording server, or an export.
 ## SYNTAX
 
 ### Path (Default)
-
 ```
 Open-MediaDatabase [-Path] <String> [-Password <SecureString>] [<CommonParameters>]
 ```
 
 ### LiteralPath
-
 ```
 Open-MediaDatabase -LiteralPath <String> [-Password <SecureString>] [<CommonParameters>]
 ```
@@ -109,7 +107,6 @@ Accept wildcard characters: False
 ```
 
 ### CommonParameters
-
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
