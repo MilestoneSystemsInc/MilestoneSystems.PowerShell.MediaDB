@@ -13,15 +13,13 @@ Context "Export-MdbMkv" {
         Open-MediaDatabase -Path $script:EncryptedDbPath -Password $password
 
         $mkvFile = Get-MdbCamera | Get-MdbSequence -Type RecordingSequence | ForEach-Object {
-            $item = [videoos.platform.configuration]::Instance.GetItem($_.FQID)
             $path = 'TestDrive:\{0}_{1}.mkv' -f $_.Source, $_.Start.ToString('yyyy-MM-dd_HH-mm-ss')
             $exportParams = @{
-                Device = $item
                 Start  = $_.Start
                 End    = $_.End
                 Path   = $path
             }
-            Export-MdbMkv @exportParams
+            $_ | Export-MdbMkv @exportParams
         }
         $mkvFile | Should -Not -BeNullOrEmpty
     }
