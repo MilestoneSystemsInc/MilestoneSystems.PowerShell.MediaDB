@@ -8,7 +8,8 @@ schema: 2.0.0
 # Get-MdbCamera
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+
+Gets camera items found in any currently opened media database.
 
 ## SYNTAX
 
@@ -17,20 +18,33 @@ Get-MdbCamera [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+
+The `Get-MdbCamera` command gets camera items found in any currently opened media database.
 
 ## EXAMPLES
 
-### Example 1
+### Display all cameras by Name and Id
+
 ```powershell
-PS C:\> {{ Add example code here }}
+Get-MdbCamera | Select-Object Name, @{ Name = 'Id'; Expression = { $_.FQID.ObjectId }}
 ```
 
-{{ Add example description here }}
+This example retrieves all cameras from all open media databases, and displays their names and ids in a table by using
+`Select-Object` with a [calculated property](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_calculated_properties?view=powershell-5.1).
+
+### Get all cameras with names containing the word "Parking"
+
+```powershell
+Get-MdbCamera | Where-Object Name -match 'Parking'
+```
+
+This example retrieves all cameras from all open media databases, and filters the results to the cameras with names
+containing the word "Parking" using `Where-Object` with the `-match` operator.
 
 ## PARAMETERS
 
 ### CommonParameters
+
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS

@@ -8,7 +8,8 @@ schema: 2.0.0
 # Get-MdbMetadata
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+
+Gets metadata items found in any currently opened media database.
 
 ## SYNTAX
 
@@ -17,16 +18,28 @@ Get-MdbMetadata [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+
+The `Get-MdbMetadata` command gets metadata items found in any currently opened media database.
 
 ## EXAMPLES
 
-### Example 1
+### Display all cameras by Name and Id
+
 ```powershell
-PS C:\> {{ Add example code here }}
+Get-MdbMetadata | Select-Object Name, @{ Name = 'Id'; Expression = { $_.FQID.ObjectId }}
 ```
 
-{{ Add example description here }}
+This example retrieves all metadata items from all open media databases, and displays their names and ids in a table by using
+`Select-Object` with a [calculated property](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_calculated_properties?view=powershell-5.1).
+
+### Get all metadata with names containing the word "Parking"
+
+```powershell
+Get-MdbMetadata | Where-Object Name -match 'Parking'
+```
+
+This example retrieves all metadata from all open media databases, and filters the results to the metadata with names
+containing the word "Parking" using `Where-Object` with the `-match` operator.
 
 ## PARAMETERS
 

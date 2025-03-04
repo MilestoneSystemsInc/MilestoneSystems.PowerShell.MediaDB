@@ -8,7 +8,8 @@ schema: 2.0.0
 # Export-MdbMkv
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+
+Export media in MKV format.
 
 ## SYNTAX
 
@@ -23,21 +24,37 @@ Export-MdbMkv -FQID <FQID> -Start <DateTime> -End <DateTime> -Path <String> [<Co
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+
+The `Export-MdbMkv` command exports media in MKV format.
 
 ## EXAMPLES
 
-### Example 1
+### Find and export all recording sequences from all cameras
+
 ```powershell
-PS C:\> {{ Add example code here }}
+$password = Read-Host -Prompt 'Database Password' -AsSecureString
+Open-MediaDatabase -Path .\encrypted-database\cache.xml -Password $password
+Get-MdbCamera | Get-MdbSequence -Type RecordingSequence | ForEach-Object {
+    $path = '.\{0}_{1}.mkv' -f $_.Source, $_.Start.ToString('yyyy-MM-dd_HH-mm-ss')
+    $exportParams = @{
+        Start  = $_.Start
+        End    = $_.End
+        Path   = $path
+    }
+    $_ | Export-MdbMkv @exportParams
+}
 ```
 
-{{ Add example description here }}
+This example will prompt for a password to open an encrypted media database. If your database is not encrypted, you can
+omit the `-Password $password` property when calling `Open-MediaDatabase`. Each recording sequence for each camera found
+in the opened media database(s) will be exported to a file named after the camera name and a timestamp matching the
+start of the recording sequence.
 
 ## PARAMETERS
 
 ### -Device
-{{ Fill Device Description }}
+
+Specifies one or more camera items as returned by `Get-MdbCamera`.
 
 ```yaml
 Type: Item
@@ -52,7 +69,8 @@ Accept wildcard characters: False
 ```
 
 ### -End
-{{ Fill End Description }}
+
+A timestamp representing the end of the time range to be exported.
 
 ```yaml
 Type: DateTime
@@ -67,7 +85,10 @@ Accept wildcard characters: False
 ```
 
 ### -FQID
-{{ Fill FQID Description }}
+
+An FQID object representing the fully-qualified identifer for XProtect devices in one of the currently opened
+databases. It is easiest to pipe one devices to the export command as the FQID property can be passed by
+property name, and all XProtect devices have an FQID property.
 
 ```yaml
 Type: FQID
@@ -82,7 +103,8 @@ Accept wildcard characters: False
 ```
 
 ### -Path
-{{ Fill Path Description }}
+
+Specifies a path to a file where the export should be saved to disk.
 
 ```yaml
 Type: String
@@ -97,7 +119,8 @@ Accept wildcard characters: False
 ```
 
 ### -Start
-{{ Fill Start Description }}
+
+A timestamp representing the start of the time range to be exported.
 
 ```yaml
 Type: DateTime
@@ -121,6 +144,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ### System.Object
+
 ## NOTES
 
 ## RELATED LINKS

@@ -8,7 +8,8 @@ schema: 2.0.0
 # Export-Mdb
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+
+Export media from one or more devices in the XProtect media database format.
 
 ## SYNTAX
 
@@ -25,21 +26,33 @@ Export-Mdb -Fqid <FQID[]> -Start <DateTime> -End <DateTime> -Path <String> [-Sig
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+
+The `Export-Mdb` command exports media from one or more devices in the XProtect media database format.
 
 ## EXAMPLES
 
-### Example 1
+### Export video from "Parking" cameras in an encrypted database
+
 ```powershell
-PS C:\> {{ Add example code here }}
+Open-MediaDatabaseOpen-MediaDatabase -Path .\encrypted-database\cache.xml -Password (Read-Host -AsSecureString)
+$cameras = Get-MdbCamera | Where-Object Name -match 'Parking'
+$exportParams = @{
+    Start  = '2025-02-28 1:00:00PM'
+    End    = '2025-02-29 8:00:00AM'
+    Path   = '.\SampleExport'
+}
+$cameras | Export-Mdb @exportParams
 ```
 
-{{ Add example description here }}
+This example will prompt for a password to open the media database at the relative path `.\encrypted-database`, find all
+cameras in the database with "Parking" in the name, then export a period of 19 hours to a subfolder of the current
+directory named 'SampleExport'.
 
 ## PARAMETERS
 
 ### -Device
-{{ Fill Device Description }}
+
+Specifies one or more devices as returned by `Get-MdbCamera`, `Get-MdbMicrophone`, and similar commands.
 
 ```yaml
 Type: Item[]
@@ -54,7 +67,8 @@ Accept wildcard characters: False
 ```
 
 ### -Encrypt
-{{ Fill Encrypt Description }}
+
+Specifies whether the export should be encrypted. If this parameter is used, the `Password` parameter is mandatory.
 
 ```yaml
 Type: SwitchParameter
@@ -69,7 +83,9 @@ Accept wildcard characters: False
 ```
 
 ### -EncryptionStrength
-{{ Fill EncryptionStrength Description }}
+
+Specifies the encryption algorithm, and thus the strength of the encryption used to protect the export. The default
+value is "AES256".
 
 ```yaml
 Type: EncryptionStrength
@@ -85,7 +101,8 @@ Accept wildcard characters: False
 ```
 
 ### -End
-{{ Fill End Description }}
+
+A timestamp representing the end of the time range to be exported.
 
 ```yaml
 Type: DateTime
@@ -100,7 +117,10 @@ Accept wildcard characters: False
 ```
 
 ### -Fqid
-{{ Fill FQID Description }}
+
+One or more FQID objects representing the fully-qualified identifer for XProtect devices in one of the currently opened
+databases. It is easiest to pipe one or more devices to the export command as the FQID property can be passed by
+property name, and all XProtect devices have an FQID property.
 
 ```yaml
 Type: FQID[]
@@ -115,7 +135,8 @@ Accept wildcard characters: False
 ```
 
 ### -NoReExport
-{{ Fill NoReExport Description }}
+
+No additional exports can be created from the resulting export.
 
 ```yaml
 Type: SwitchParameter
@@ -130,7 +151,8 @@ Accept wildcard characters: False
 ```
 
 ### -Password
-{{ Fill Password Description }}
+
+The password to use to encrypt the export.
 
 ```yaml
 Type: SecureString
@@ -145,7 +167,8 @@ Accept wildcard characters: False
 ```
 
 ### -Path
-{{ Fill Path Description }}
+
+Specifies a path to a folder where the export should be saved to disk.
 
 ```yaml
 Type: String
@@ -160,7 +183,9 @@ Accept wildcard characters: False
 ```
 
 ### -Sign
-{{ Fill Sign Description }}
+
+Specifies that the export should be signed. A signed export is more difficult to tamper with as doing so would
+invalidate the signature.
 
 ```yaml
 Type: SwitchParameter
@@ -175,7 +200,8 @@ Accept wildcard characters: False
 ```
 
 ### -Start
-{{ Fill Start Description }}
+
+A timestamp representing the start of the time range to be exported.
 
 ```yaml
 Type: DateTime

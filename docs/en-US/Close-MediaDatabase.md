@@ -29,7 +29,7 @@ The `Close-MediaDatabase` command closes the media database opened with the `Ope
 
 ## EXAMPLES
 
-### Example 1
+### Close all open media databases
 
 ```powershell
 Close-MediaDatabase
@@ -37,7 +37,7 @@ Close-MediaDatabase
 
 Closes all media databases previously opened using `Open-MediaDatabase`.
 
-### Example 2
+### Close all open media databases using alias
 
 ```powershell
 Close-Mdb
@@ -45,10 +45,29 @@ Close-Mdb
 
 Closes all media databases previously opened using `Open-MediaDatabase` using the `Close-Mdb` alias.
 
+### Close one media database by path
+
+```powershell
+Close-Mdb -Path .\MediaDatabase\cache.xml
+```
+
+Closes one media database by specifying a relative path to the `cache.xml` file used to originally open the media
+database. Any other media databases opened during the same session will remain open.
+
+### Close one media database by literal path
+
+```powershell
+Close-Mdb -Path 'C:\MediaDatabase\Storage [Long Term]\cache.xml'
+```
+
+Closes one media database by specifying an absolute, literal path to the `cache.xml` file used to originally open the
+media database. Any other media databases opened during the same session will remain open.
+
 ## PARAMETERS
 
 ### -LiteralPath
-{{ Fill LiteralPath Description }}
+
+Specifies the literal path to a `cache.xml` file at the root of an XProtect media database.
 
 ```yaml
 Type: String
@@ -63,7 +82,8 @@ Accept wildcard characters: False
 ```
 
 ### -Path
-{{ Fill Path Description }}
+
+Specifies the path to a `cache.xml` file at the root of an XProtect media database.
 
 ```yaml
 Type: String

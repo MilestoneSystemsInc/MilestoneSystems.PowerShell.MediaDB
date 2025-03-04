@@ -8,7 +8,8 @@ schema: 2.0.0
 # Get-MdbMicrophone
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+
+Gets microphone items found in any currently opened media database.
 
 ## SYNTAX
 
@@ -17,16 +18,28 @@ Get-MdbMicrophone [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+
+The `Get-MdbMicrophone` command gets microphone items found in any currently opened media database.
 
 ## EXAMPLES
 
-### Example 1
+### Display all microphones by Name and Id
+
 ```powershell
-PS C:\> {{ Add example code here }}
+Get-MdbMicrophone | Select-Object Name, @{ Name = 'Id'; Expression = { $_.FQID.ObjectId }}
 ```
 
-{{ Add example description here }}
+This example retrieves all microphones from all open media databases, and displays their names and ids in a table by using
+`Select-Object` with a [calculated property](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_calculated_properties?view=powershell-5.1).
+
+### Get all microphones with names containing the word "Parking"
+
+```powershell
+Get-MdbMicrophone | Where-Object Name -match 'Parking'
+```
+
+This example retrieves all microphones from all open media databases, and filters the results to the microphones with names
+containing the word "Parking" using `Where-Object` with the `-match` operator.
 
 ## PARAMETERS
 

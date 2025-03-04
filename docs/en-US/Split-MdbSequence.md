@@ -8,7 +8,8 @@ schema: 2.0.0
 # Split-MdbSequence
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+
+Splits one or more sequences based on the provided maximum duration.
 
 ## SYNTAX
 
@@ -17,21 +18,39 @@ Split-MdbSequence [-Sequences] <SequenceInfo[]> [[-MaxDuration] <TimeSpan>] [<Co
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+
+The `Split-MdbSequence` command splits one or more sequences based on the provided maximum duration. This can be useful
+when you are processing a large media database and need to create multiple exports of a specific duration.
+
+When provided with a number of sequences, the duration of each sequence will be measured against the maximum duration,
+and the resulting "split" sequences may bridge across multiple sequences in order to ensure each resulting sequence
+contains no more than the `MaxDuration`.
 
 ## EXAMPLES
 
-### Example 1
+### Export all video in MKV format with a maximum duration of 5 minutes each
+
 ```powershell
-PS C:\> {{ Add example code here }}
+Get-MdbCamera | Get-MdbSequence | Split-MdbSequence -MaxDuration (New-Timespan -Minutes 5) | ForEach-Object {
+    $path = '.\{0}_{1}.mkv' -f $_.Source, $_.Start.ToString('yyyy-MM-dd_HH-mm-ss')
+    $exportParams = @{
+        Start  = $_.Start
+        End    = $_.End
+        Path   = $path
+    }
+    $_ | Export-MdbMkv @exportParams
+}
 ```
 
-{{ Add example description here }}
+This example retrieves all cameras from all open media databases, and gets all recording sequences from each camera,
+then splits those sequences into new sequences with a maximum duration of 5 minutes each before exporting them to MKV
+files.
 
 ## PARAMETERS
 
 ### -MaxDuration
-{{ Fill MaxDuration Description }}
+
+Specifies the maximum length of the resulting sequences.
 
 ```yaml
 Type: TimeSpan
@@ -46,7 +65,8 @@ Accept wildcard characters: False
 ```
 
 ### -Sequences
-{{ Fill Sequences Description }}
+
+Specifies one or more sequence to split.
 
 ```yaml
 Type: SequenceInfo[]
@@ -61,6 +81,7 @@ Accept wildcard characters: False
 ```
 
 ### CommonParameters
+
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
@@ -69,7 +90,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### System.Object
+### SequenceInfo
+
 ## NOTES
 
 ## RELATED LINKS
