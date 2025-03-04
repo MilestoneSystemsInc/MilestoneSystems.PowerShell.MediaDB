@@ -27,15 +27,16 @@ jobs:
       shell: powershell
       run: |
           .\build.ps1 -Task Test -Bootstrap -ErrorAction Stop
-          "ModulePath=$($env:BHBuildOutput)" | Add-Content "$($env:GITHUB_OUTPUT)"
-
-    - name: Publish Windows Test Results
-      uses: EnricoMi/publish-unit-test-result-action/windows@v2
-      with:
-        files: |
-          tests/out/*.xml
+          "ModulePath=$(Split-Path $env:BHBuildOutput -Parent)" | Add-Content "$($env:GITHUB_OUTPUT)"
 
     - uses: actions/upload-artifact@v4
       with:
         name: MilestoneSystems.PowerShell.MediaDB
         path: ${{ steps.build.outputs.ModulePath }}
+
+    - name: Publish Windows Test Results
+      if: always()
+      uses: EnricoMi/publish-unit-test-result-action/windows@v2
+      with:
+        files: |
+          tests/out/*.xml
