@@ -16,10 +16,20 @@ jobs:
         fetch-depth: 0
         lfs: true
 
-    - name: Test
-      id: test
+    - name: Build and Test
+      id: build
       shell: powershell
       run: |
           .\build.ps1 -Task Test -Bootstrap -ErrorAction Stop
-          "BHBuildOutput=$($env:BHBuildOutput)" | Add-Content "$($env:GITHUB_OUTPUT)"
+          "ModulePath=$($env:BHBuildOutput)" | Add-Content "$($env:GITHUB_OUTPUT)"
 
+    - name: Publish Windows Test Results
+      uses: EnricoMi/publish-unit-test-result-action/windows@v2
+      with:
+        files: |
+          tests/out/*.xml
+
+    - uses: actions/upload-artifact@v4
+      with:
+        name: MilestoneSystems.PowerShell.MediaDB
+        path: ${{ steps.build.outputs.ModulePath }}

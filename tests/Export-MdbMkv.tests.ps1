@@ -20,7 +20,6 @@ Context "Export-MdbMkv" {
                 Path        = $path
                 ErrorAction = 'Stop'
             }
-            Write-Host "Exporting to $path" -ForegroundColor Magenta
             $_ | Export-MdbMkv @exportParams
         }
         $mkvFile | Should -Not -BeNullOrEmpty
