@@ -19,8 +19,6 @@ function Get-MdbSequence {
         [string]
         $Type = 'RecordingSequence',
 
-        # If the start or end time falls within a sequence, the entire sequence is returned. Use
-        # the Crop switch to trim the first and last sequences to the provided Start and End times.
         [Parameter()]
         [switch]
         $Crop,
