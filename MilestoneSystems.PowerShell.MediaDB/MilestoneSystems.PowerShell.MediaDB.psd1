@@ -10,10 +10,10 @@
     FunctionsToExport = '*'
     CmdletsToExport   = '*'
     VariablesToExport = '*'
-    AliasesToExport   = '*'
+    AliasesToExport   = @('Close-Mdb', 'Open-Mdb')
     PrivateData       = @{
         PSData = @{
-            # Tags = @()
+            Tags = @('Windows', 'MilestoneSystems', 'XProtect')
             # LicenseUri = ''
             # ProjectUri = ''
             # IconUri = ''
