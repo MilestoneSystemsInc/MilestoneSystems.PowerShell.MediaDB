@@ -45,6 +45,10 @@ function Export-MdbMkv {
             $null = New-Item -Path $fileInfo.DirectoryName -ItemType Directory -Force
         }
 
+        $pathIsFolder = $false
+        if (Test-Path $fileInfo.FullName -PathType Container) {
+            $pathIsFolder = $true
+        }
 
         try {
             Write-Verbose "Exporting $($Device.Name) from $($Start.ToLocalTime().ToString('o')) to $($End.ToLocalTime().ToString('o'))"
@@ -58,8 +62,8 @@ function Export-MdbMkv {
             $exporter = [videoos.platform.data.mkvexporter]::new()
             $exporter.CameraList.Add($Device)
 
-            $exporter.Filename = $fileInfo.Name
-            $exporter.Path = $fileInfo.DirectoryName
+            $exporter.Filename = if ($pathIsFolder) { '{0}_{1}.mkv' -f (ConvertTo-ValidFileName $Device.Name), $Start.ToString('yyyy-MM-dd_HH-mm-ss') } else { $fileInfo.Name }
+            $exporter.Path = if ($pathIsFolder) { $fileInfo.FullName } else { $fileInfo.DirectoryName }
             $exporter.Init()
             if (!$exporter.StartExport($Start, $End)) {
                 Write-Error "MKVExporter could not begin the export process. Error code $($exporter.LastError): $($exporter.LastErrorString)" -TargetObject $exporter
@@ -74,7 +78,7 @@ function Export-MdbMkv {
                 Write-Error "MKVExporter returned error code $($exporter.LastError): $($exporter.LastErrorString)" -TargetObject $exporter
                 return
             }
-            Get-Item -LiteralPath $Path
+            Get-Item -LiteralPath (Join-Path $exporter.Path $exporter.Filename)
         } catch {
             Write-Error -Message $_.Exception.Message
         } finally {
