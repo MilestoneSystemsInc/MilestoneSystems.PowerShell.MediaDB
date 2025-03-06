@@ -2,6 +2,7 @@ Context "Export-Mdb" {
     BeforeAll {
         $script:EncryptedDbPath = [io.path]::Combine($PSScriptRoot, 'data', 'EncryptedExport', 'cache.xml')
         $script:UnencryptedDbPath = [io.path]::Combine($PSScriptRoot, 'data', 'UnencryptedExport', 'cache.xml')
+        Close-MediaDatabase
     }
 
     AfterEach {

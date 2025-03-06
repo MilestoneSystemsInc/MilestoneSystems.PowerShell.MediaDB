@@ -1,0 +1,96 @@
+@font-face {
+  font-family: 'Open Sans';
+  src: url('/assets/fonts/opensans-variablefont_wdth,wght.ttf') format('truetype');
+  font-weight: 100 1000;
+  font-stretch: 25% 151%;
+}
+
+@font-face {
+  font-family: Cascadia Code;
+  src: url(/assets/fonts/CascadiaCodeNF.ttf) format("truetype")
+}
+
+.terminal-border {
+  border-radius: 10px;
+  background-color: #262C31;
+  padding: 0px 0px 0px 6px;
+}
+
+.xterm-container {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+:root {
+  --md-text-font: "Open Sans";
+}
+
+[data-md-color-scheme="milestone-dark"] {
+    /* Milestone Digital Copy */
+    --md-typeset-color: #d4d4d4;
+    --md-default-fg-color: #d4d4d4;
+    --md-default-bg-color: #303436;
+    /* Milestone Clear Blue */
+    --md-primary-fg-color: #023852;
+    --md-primary-fg-color--dark: #023852;
+    /* Milestone Clear Blue */
+    --md-accent-fg-color: #0099da;
+    --md-typeset-a-color: #0081c1;
+    --md-typeset-h1-color: #0099da;
+    --md-default-fg-color--light: #d4d4d4;
+
+    --md-accent-fg-color: #0099da;
+
+    /* Code Highlighting - VSCode*/
+    --md-code-fg-color: #d4d4d4;
+    --md-code-bg-color: #1e1e1e;
+    --md-code-hl-comment-color: #6a994e;
+    /* Used for function names */
+    --md-code-hl-constant-color: #dcdcaa;
+    --md-code-hl-operator-color: #d4d4d4;
+    --md-code-hl-punctuation-color: #d4d4d4;
+    /* Used for parameter names and properties */
+    --md-code-hl-name-color: #d4d4d4;
+    --md-code-hl-keyword-color: #c586b6;
+    --md-code-hl-variable-color: #9cdcfe;
+    --md-code-hl-string-color: #ce916a;
+    --md-code-hl-generic-color: #d4d4d4;
+    --md-code-hl-number-color: #b5cea8;
+
+
+    --md-footer-bg-color: #1e1e1e;
+    --md-footer-bg-color--dark: #000000
+  }
+
+  [data-md-color-scheme="milestone-light"] {
+    /* Light mode uses PowerShell ISE color scheme for code blocks */
+
+    /* Milestone Digital Copy */
+    --md-typeset-color: #303436;
+    --md-default-fg-color: #303436;
+    /* Milestone Clear Blue */
+    --md-primary-fg-color: #0099da;
+    --md-primary-fg-color--dark: #0081c1;
+    /* Milestone Clear Blue */
+    --md-accent-fg-color: #0099da;
+
+    /* Code Highlighting - VSCode*/
+    --md-code-fg-color: #000080;
+    --md-code-bg-color: #f6f8fa;
+    --md-code-hl-comment-color: #006400;
+    /* Used for function names */
+    --md-code-hl-constant-color: #0000ff;
+    --md-code-hl-operator-color: #696969;
+    --md-code-hl-punctuation-color: #696969;
+    /* Used for parameter names and properties */
+    --md-code-hl-name-color: #000080;
+    --md-code-hl-keyword-color: #00008b;
+    --md-code-hl-variable-color: #a82d00;
+    --md-code-hl-string-color: #8b0000;
+    --md-code-hl-generic-color: #d4d4d4;
+    --md-code-hl-number-color: #b5cea8;
+
+    --md-footer-bg-color: #303436;
+    --md-footer-bg-color--dark: #1e1e1e
+  }

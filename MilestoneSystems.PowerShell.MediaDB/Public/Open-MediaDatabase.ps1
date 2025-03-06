@@ -5,7 +5,9 @@ function Open-MediaDatabase {
         [Parameter(Mandatory, Position = 0, ParameterSetName = 'Path')]
         [ValidateScript({
                 if ($_ -notmatch 'cache\.xml$') {
-                    throw "The provided media database path must be a path to a file named 'cache.xml'"
+                    if (!(Test-Path -Path (Join-Path $_ 'cache.xml'))) {
+                        throw "The provided media database path must be a path to a file named 'cache.xml', or a directory containing a cache.xml file."
+                    }
                 }
                 $true
             })]
@@ -14,9 +16,11 @@ function Open-MediaDatabase {
 
         [Parameter(Mandatory, ParameterSetName = 'LiteralPath')]
         [ValidateScript({
-                if ($_ -notmatch 'cache\.xml$') {
-                    throw "The provided media database path must be a path to a file named 'cache.xml'"
+            if ($_ -notmatch 'cache\.xml$') {
+                if (!(Test-Path -LiteralPath (Join-Path $_ 'cache.xml'))) {
+                    throw "The provided media database path must be a path to a file named 'cache.xml', or a directory containing a cache.xml file."
                 }
+            }
                 $true
             })]
         [string]
@@ -27,12 +31,16 @@ function Open-MediaDatabase {
         $Password = [securestring]::new()
     )
 
+    $ErrorActionPreference = 'Stop'
     $DatabasePath = [string]::Empty
     if (![string]::IsNullOrWhiteSpace($Path)) {
         $DatabasePath = (Resolve-Path -Path $Path).Path
     }
     if (![string]::IsNullOrWhiteSpace($LiteralPath)) {
         $DatabasePath = (Resolve-Path -LiteralPath $LiteralPath).Path
+    }
+    if ($DatabasePath -notmatch 'cache\.xml$') {
+        $DatabasePath = (Resolve-Path -LiteralPath (Join-Path $DatabasePath 'cache.xml')).Path
     }
 
     try {

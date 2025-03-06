@@ -8,6 +8,7 @@ properties {
     $PSBPreference.Build.CompileModule = $true
     $PSBPreference.Help.DefaultLocale = 'en-US'
     $PSBPreference.Test.OutputFile = 'out/testResults.xml'
+    $PSBPreference.Docs.RootDir = './docs/commands'
 
     $psake.context.tasks.stagefiles.PostAction = {
         $outputManifestPath = [io.path]::Combine($PSBPreference.Build.ModuleOutDir, "$($PSBPreference.General.ModuleName).psd1")

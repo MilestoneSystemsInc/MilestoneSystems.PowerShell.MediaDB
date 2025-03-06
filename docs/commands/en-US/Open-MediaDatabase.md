@@ -60,7 +60,8 @@ This example will open an encrypted media database and then list all recording s
 
 ### -LiteralPath
 
-Specifies the literal file path to a `cache.xml` file at the root of a media database folder.
+Specifies the literal file path to a `cache.xml` file at the root of a media database folder, or a media database folder
+containing a cache.xml file.
 
 ```yaml
 Type: String
@@ -92,7 +93,8 @@ Accept wildcard characters: False
 
 ### -Path
 
-Specifies the file path to a `cache.xml` file at the root of a media database folder.
+Specifies the file path to a `cache.xml` file at the root of a media database folder, or a media database folder
+containing a cache.xml file.
 
 ```yaml
 Type: String

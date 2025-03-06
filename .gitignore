@@ -1,6 +1,4 @@
-# Don't check in the Output dir
 Output/
-
 scratch/
-
 testResults.xml
+.cache/
