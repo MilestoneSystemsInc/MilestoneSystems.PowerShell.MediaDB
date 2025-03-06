@@ -11,6 +11,7 @@
     CmdletsToExport   = '*'
     VariablesToExport = '*'
     AliasesToExport   = @('Close-Mdb', 'Open-Mdb')
+    FormatsToProcess  = 'MilestoneSystems.PowerShell.MediaDB.Format.ps1xml'
     PrivateData       = @{
         PSData = @{
             Tags = @('Windows', 'MilestoneSystems', 'XProtect')
